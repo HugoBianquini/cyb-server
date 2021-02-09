@@ -1,6 +1,7 @@
 const express = require('express');
+var nodemailer = require('nodemailer');
+const firebase = require('./config/admin/firebase-admin-config'); 
 const app = express();
-var nodemailer = require('nodemailer')
 
 var transporter = nodemailer.createTransport({
   service: 'hotmail',
@@ -10,10 +11,22 @@ var transporter = nodemailer.createTransport({
   }
 });
 
+
+app.get("/getPlanos", (req, res) => {
+
+  firebase.database().ref().child('planos').once('value', (snapshot) => {
+    const data = snapshot.val();
+    res.json(data);
+  })
+});
+
+
+
 app.get("/sendEmail", (req, res) => {
 
   var message = req.query.message;
   var email = req.query.email;
+  var name = req.query.name;
   
   
   if(message != "") {
@@ -22,7 +35,7 @@ app.get("/sendEmail", (req, res) => {
     from: 'hugobianqui@hotmail.com',
     to: 'hugo@inoveai.com',
     subject: 'Mensagem enviada através do Site da CYB Tech',
-    text:  "E-mail do Usuário: "
+    text:  "Nome do usuário: " + name + "E-mail do Usuário: "
      + email + "\nMensagem:\n" + message,
   }
   
