@@ -4,10 +4,10 @@ const firebase = require('./config/admin/firebase-admin-config');
 const app = express();
 
 var transporter = nodemailer.createTransport({
-  service: 'hotmail',
+  service: 'gmail',
   auth: {
-    user: 'hugobianqui@hotmail.com',
-    pass: 'SiriuLupi1'
+    user: 'hugobianqui2001@gmail.com',
+    pass: 'siriulupi1'
   }
 });
 
@@ -32,7 +32,7 @@ app.get("/sendEmail", (req, res) => {
   if(message != "") {
   
   var mailOptions = {
-    from: 'hugobianqui@hotmail.com',
+    from: 'hugobianqui2001@gmail.com',
     to: 'hugo@inoveai.com',
     subject: 'Mensagem enviada através do Site da CYB Tech',
     text:  "Nome do usuário: " + name + "E-mail do Usuário: "
