@@ -5,11 +5,7 @@ const firebase = require('./config/admin/firebase-admin-config');
 const app = express();
 
 //Allow cross-origins requests
-var corsOptions = {
-  origin: '*'
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -53,6 +49,7 @@ app.get("/sendEmail", (req, res) => {
       res.send("Erro ao enviar")
     } else {
       console.log("Message Sent Succesfully" + info.response);
+      res.setHeader('Access-Control-Allow-Origin', '*');
       res.send("Enviado com sucesso")
     }
   })
