@@ -1,7 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 var nodemailer = require('nodemailer');
 const firebase = require('./config/admin/firebase-admin-config'); 
 const app = express();
+
+//Allow cross-origins requests
+app.use(cors());
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
