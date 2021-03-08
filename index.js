@@ -37,7 +37,7 @@ app.get("/sendEmail", (req, res) => {
   
   var mailOptions = {
     from: 'site@cybtech.com.br',
-    to: 'site@cybtech.com.br',
+    to: 'contato@cybtech.com.br',
     subject: 'Mensagem enviada através do Site da CYB Tech',
     text:  "Nome do usuário: " + name + "\nE-mail do Usuário: "
      + email + "\nMensagem:\n" + message,
