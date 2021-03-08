@@ -10,8 +10,8 @@ app.use(cors());
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'hugobianqui2001@gmail.com',
-    pass: 'siriulupi1'
+    user: 'contato@cybtech.com.br',
+    pass: '@#contato2802'
   }
 });
 
