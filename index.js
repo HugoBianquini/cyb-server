@@ -68,7 +68,7 @@ app.get("/sendEmail", (req, res) => {
     if(message != ""){
 
     var mailOptions = {
-      from: '"CYB Tech - Corretora Digital" <contato@cybtech.com.br>',
+      from: 'contato@cybtech.com.br',
       to: email,
       subject: subject,
       text: message,
@@ -79,7 +79,7 @@ app.get("/sendEmail", (req, res) => {
         console.log(error)
         res.send("error")
       } else {
-        console.log("Message Sent Succesfully" + info.response);
+        console.log("Message Sent Succesfully: " + info);
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.send("sended");
       }
