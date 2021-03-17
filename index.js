@@ -63,6 +63,8 @@ app.get("/sendEmail", (req, res) => {
     var message = req.query.message;
     var email = req.query.email;
 
+    console.log(email);
+
     if(message != ""){
 
     var mailOptions = {
