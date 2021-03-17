@@ -52,10 +52,41 @@ app.get("/sendEmail", (req, res) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.send("Enviado com sucesso")
     }
-  })
+  });
   } else {
     console.log('Dados incompletos');
   }
+  });
+
+  app.get("sendEmailMessage", (req, res) => {
+    var subject = req.query.subject;
+    var message = req.query.message;
+    var email = req.query.email;
+
+    if(message != ""){
+
+    var mailOptions = {
+      from: '"CYB Tech - Corretora Digital" <contato@cybtech.com.br>',
+      to: email,
+      subject: subject,
+      text: message,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if(error){
+        console.log(error)
+        res.send("error")
+      } else {
+        console.log("Message Sent Succesfully" + info.response);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send("sended");
+      }
+    });
+
+  } else {
+    res.send("bad request");
+  }
+
   });
 
 var port = process.env.PORT || 3000;
