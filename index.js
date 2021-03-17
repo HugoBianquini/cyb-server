@@ -58,7 +58,7 @@ app.get("/sendEmail", (req, res) => {
   }
   });
 
-  app.get("sendEmailMessage", (req, res) => {
+  app.get("/sendEmailMessage", (req, res) => {
     var subject = req.query.subject;
     var message = req.query.message;
     var email = req.query.email;
