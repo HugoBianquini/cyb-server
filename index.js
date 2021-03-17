@@ -68,7 +68,7 @@ app.get("/sendEmail", (req, res) => {
     if(message != ""){
 
     var mailOptions = {
-      from: 'CYB Tech',
+      from: 'CYB Tech <contato@cybtech.com.br>',
       to: email,
       subject: subject,
       text: message,
