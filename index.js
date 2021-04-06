@@ -7,14 +7,6 @@ const app = express();
 //Allow cross-origins requests
 app.use(cors());
 
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'contato@cybtech.com.br',
-    pass: '@#contato2802'
-  }
-});
-
 
 app.get("/getPlanos", (req, res) => {
 
@@ -32,8 +24,15 @@ app.get("/sendEmail", (req, res) => {
   var email = req.query.email;
   var name = req.query.name;
   
-  
   if(message != "") {
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'contato@cybtech.com.br',
+        pass: '@#contato2802'
+      }
+    });
   
   var mailOptions = {
     from: 'site@cybtech.com.br',
@@ -67,11 +66,61 @@ app.get("/sendEmail", (req, res) => {
 
     if(message != ""){
 
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'contato@cybtech.com.br',
+          pass: '@#contato2802'
+        }
+      });
+
     var mailOptions = {
-      from: 'CYB Tech <contato@cybtech.com.br>',
+      from: 'contato@cybtech.com.br',
       to: email,
       subject: subject,
       text: message,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if(error){
+        console.log(error)
+        res.send("error")
+      } else {
+        console.log("Message Sent Succesfully: " + info);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send("sended");
+      }
+    });
+
+  } else {
+    res.send("bad request");
+  }
+
+  });
+
+  app.get("/cybSolucoesMail", (req, res) => {
+    var name = req.query.name;
+    var message = req.query.message;
+    var email = req.query.email;
+
+    console.log(email);
+
+    if(message != ""){
+
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'contato@cybtech.com.br',
+          pass: '@#contato2802'
+        }
+      });
+
+    var mailOptions = {
+      from: 'CYB Tech <contato@cybtech.com.br>',
+      to: email,
+      subject: 'Mensagem enviada através do Site da CYB Soluções',
+      text: "Nome do usuário: " + name + "\nE-mail do Usuário: "
+      + email + "\nMensagem:\n" + message,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
